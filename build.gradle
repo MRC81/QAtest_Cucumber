@@ -9,57 +9,58 @@ repositories {
     mavenCentral()
 }
 
-def selenideVersion = "5.23.2",
-    junitVersion = "5.7.2",
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+ext {
+    selenideVersion = '5.24.0'
+    junitVersion = "5.7.2"
     cucumberVersion = "6.11.0"
+}
 
 dependencies {
-    implementation ("org.junit.jupiter:junit-jupiter-api:$junitVersion",
+    implementation (
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion",
             "com.codeborne:selenide:$selenideVersion",
             "io.cucumber:cucumber-java:$cucumberVersion",
             "io.cucumber:cucumber-junit:$cucumberVersion",
             "io.cucumber:cucumber-picocontainer:$cucumberVersion",
+            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
             "org.slf4j:slf4j-simple:1.7.32"
     )
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
-task deleteCucumberReports(type: Delete) {
-    dependsOn(clean)
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
 
-    delete 'out', 'target', 'build'
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:reports/cucumber-report.html',
+                    '--glue', 'cucumber.glue.steps',
+                    '--glue', 'cucumber.glue.hooks',
+                    '--publish',
+                    'src/test/resources/features']
+        }
+    }
 }
 
 test {
-    //useJUnitPlatform()
-    systemProperties(System.getProperties())
+    useJUnitPlatform()
+    systemProperties(project.gradle.startParameter.systemPropertiesArgs)
 }
 
-//task runTests (type: Test) {
-//    dependsOn(deleteCucumberReports)
-//
-////    systemProperty 'selenide.browser', System.getProperty('selenide.browser')
-////    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-//    systemProperties(System.getProperties())
-//}
-
-//task chrome(type: Test) {
-//    dependsOn(deleteCucumberReports)
-//    systemProperties['selenide.browser'] = 'chrome'
-//    systemProperties(System.getProperties())
-//}
-//
-//task firefox(type: Test) {
-//    dependsOn(deleteCucumberReports)
-//    systemProperties['selenide.browser'] = 'firefox'
-//    systemProperties(System.getProperties())
-//}
-//
-//task edge(type: Test) {
-//    dependsOn(deleteCucumberReports)
-//    systemProperties['selenide.browser'] = 'edge'
-//    systemProperties(System.getProperties())
-//}
 
