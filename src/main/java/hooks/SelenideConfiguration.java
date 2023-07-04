@@ -1,7 +1,9 @@
-package cucumber.glue.hooks;
+package hooks;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+
+import static Infrastructure.Utilities.setSelenideProperties;
 import static java.lang.Boolean.parseBoolean;
 
 
@@ -13,12 +15,10 @@ public class SelenideConfiguration {
 
         Configuration.browser = browser;
         Configuration.headless = headless;
-        Configuration.startMaximized = true;
-        Configuration.screenshots = true;
-        Configuration.savePageSource =false;
-        Configuration.reportsFolder = "reports";
-
         Configuration.baseUrl = "https://www.investing.com";
+
+        setSelenideProperties();
+
     }
 
     public void closeSession(){

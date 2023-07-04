@@ -10,14 +10,14 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_14
+    targetCompatibility = JavaVersion.VERSION_14
 }
 
 ext {
-    selenideVersion = '5.24.0'
-    junitVersion = "5.7.2"
-    cucumberVersion = "6.11.0"
+    selenideVersion = '6.16.0'
+    junitVersion = "5.9.3"
+    cucumberVersion = "7.12.1"
 }
 
 dependencies {
@@ -41,7 +41,7 @@ configurations {
     }
 }
 
-task cucumber() {
+tasks.register('cucumber') {
     dependsOn assemble, testClasses
     doLast {
         javaexec {

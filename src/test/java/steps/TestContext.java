@@ -1,4 +1,4 @@
-package cucumber.glue.steps;
+package steps;
 
 import java.util.HashMap;
 
