@@ -1,6 +1,6 @@
-package Infrastructure;
+package tst.investing.hooks.Infrastructure;
 
-import hooks.SelenideConfiguration;
+import tst.investing.hooks.SelenideConfiguration;
 
 import java.io.IOException;
 import java.io.InputStream;

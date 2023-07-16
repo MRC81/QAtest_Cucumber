@@ -1,9 +1,9 @@
-package hooks;
+package tst.investing.hooks;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 
-import static Infrastructure.Utilities.setSelenideProperties;
+import static tst.investing.hooks.Infrastructure.Utilities.setSelenideProperties;
 import static java.lang.Boolean.parseBoolean;
 
 

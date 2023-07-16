@@ -1,6 +1,7 @@
-package steps;
+package tst.investing.steps;
 
-import PageObjects.EquityPage;
+import tst.investing.hooks.Infrastructure.TestContext;
+import tst.investing.hooks.PageObjects.EquityPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

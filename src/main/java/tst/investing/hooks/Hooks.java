@@ -1,4 +1,4 @@
-package hooks;
+package tst.investing.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -6,9 +6,9 @@ import io.cucumber.java.Before;
 
 public class Hooks {
 
-    private SelenideConfiguration selenideConfiguration;
+    private final tst.investing.hooks.SelenideConfiguration selenideConfiguration;
 
-    public Hooks(SelenideConfiguration selenideConfiguration) {
+    public Hooks(tst.investing.hooks.SelenideConfiguration selenideConfiguration) {
         this.selenideConfiguration = selenideConfiguration;
     }
 

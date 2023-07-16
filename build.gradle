@@ -3,7 +3,7 @@ plugins {
     id 'io.qameta.allure' version '2.11.2'
 }
 
-group 'tst.test'
+group 'tst.investing'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -18,8 +18,10 @@ java {
 ext {
     selenideVersion = '6.16.0'
     junitVersion = "5.9.3"
+    junitPlatformVersion = "1.9.3"
     cucumberVersion = "7.12.1"
     allureVersion= "2.21.0"
+    slf4jVersion = "2.0.7"
 }
 
 allure {
@@ -32,27 +34,32 @@ allure {
         aspectjWeaver.set(true)
 
         frameworks {
-            junit5 {
-                adapterVersion.set(allureVersion)
-            }
-            cucumber7Jvm
+            junit5
         }
     }
 }
-
 
 dependencies {
     implementation (
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion",
+            "org.junit.platform:junit-platform-suite:$junitPlatformVersion",
+            platform("org.junit:junit-bom:$junitVersion"),
+            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
+
             "com.codeborne:selenide:$selenideVersion",
+
             "io.cucumber:cucumber-java:$cucumberVersion",
             "io.cucumber:cucumber-junit:$cucumberVersion",
+            "io.cucumber:cucumber-junit-platform-engine:$cucumberVersion",
+            "io.cucumber:cucumber-core:$cucumberVersion",
+            platform("io.cucumber:cucumber-bom:$cucumberVersion"),
             "io.cucumber:cucumber-picocontainer:$cucumberVersion",
+
             "io.qameta.allure:allure-cucumber7-jvm:$allureVersion",
             "io.qameta.allure:allure-junit5:$allureVersion",
-            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
-            "org.slf4j:slf4j-simple:2.0.7"
+
+            "org.slf4j:slf4j-simple:$slf4jVersion"
     )
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
@@ -64,28 +71,14 @@ configurations {
     }
 }
 
-tasks.register('cucumber') {
-    dependsOn assemble, testClasses
-    doLast {
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = [
-                    '--plugin', 'pretty',
-                    '--plugin', 'html:reports/cucumber-report.html',
-                    '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm',
-                    '--glue', 'steps',
-                    '--glue', 'hooks',
-                    '--publish',
-                    'src/test/resources/features']
-        }
-    }
-}
 
 test {
-    dependsOn 'cucumber'
+    systemProperties = System.properties as Map<String, ?>
     useJUnitPlatform()
+
     systemProperties(project.gradle.startParameter.systemPropertiesArgs)
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
 
     testLogging {
         events "PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
