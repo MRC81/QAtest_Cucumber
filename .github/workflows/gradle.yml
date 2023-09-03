@@ -23,6 +23,9 @@ jobs:
           java-version: '14'
           distribution: 'adopt'
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+
       - name: Build and Test
         run: |
           ./gradlew clean test
