@@ -1,0 +1,48 @@
+name: Cucumber Allure tests CI
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '14'
+
+      - name: Build and Test
+        run: |
+          ./gradlew clean test
+
+      - name: Generate Allure Reports
+        run: |
+          ./gradlew allureReport
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-results
+          path: build/allure-results
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Allure Results
+        uses: actions/download-artifact@v2
+        with:
+          name: allure-results
+
+      - name: Publish Allure Report
+        run: |
+          allure generate allure-results --clean
+          allure open
