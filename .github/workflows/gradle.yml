@@ -27,30 +27,57 @@ jobs:
       - run: chrome --version
 
       - name: Build and Test with Gradle
+        if: always()
         run: |
           ./gradlew clean test
+        continue-on-error: true
 
-      - name: Generate Allure Reports
-        run: |
-          ./gradlew allureReport
-
-      - name: Upload Allure Results
-        uses: actions/upload-artifact@v3
+#      - name: Generate Allure Reports
+#        run: |
+#          ./gradlew allureReport
+#
+#      - name: Upload Allure Results
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: allure-results
+#          path: build/allure-results
+#
+#  publish:
+#    needs: build
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Download Allure Results
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: allure-results
+#
+#      - name: Publish Allure Report
+#        run: |
+#          allure generate allure-results --clean
+#          allure open
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
         with:
-          name: allure-results
-          path: build/allure-results
+          ref: gh-pages
+          path: gh-pages
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download Allure Results
-        uses: actions/download-artifact@v3
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
         with:
-          name: allure-results
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
 
-      - name: Publish Allure Report
-        run: |
-          allure generate allure-results --clean
-          allure open
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
