@@ -1,10 +1,11 @@
-package tst.investing.hooks;
+package tst.investing;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-import static tst.investing.hooks.Infrastructure.Utilities.setSelenideProperties;
 import static java.lang.Boolean.parseBoolean;
+import static tst.investing.hooks.Infrastructure.Utilities.setSelenideProperties;
 
 
 public class SelenideConfiguration {
@@ -17,8 +18,15 @@ public class SelenideConfiguration {
         Configuration.headless = headless;
         Configuration.baseUrl = "https://www.investing.com";
 
-        setSelenideProperties();
+        ChromeOptions options = new ChromeOptions();
 
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
+
+        Configuration.browserCapabilities = options;
+
+        setSelenideProperties();
     }
 
     public void closeSession(){
