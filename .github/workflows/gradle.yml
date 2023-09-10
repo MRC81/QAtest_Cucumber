@@ -35,7 +35,7 @@ jobs:
           ./gradlew allureReport
 
       - name: Upload Allure Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: allure-results
           path: build/allure-results
@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: Download Allure Results
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: allure-results
 
