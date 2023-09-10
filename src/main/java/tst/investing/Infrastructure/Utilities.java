@@ -1,19 +1,21 @@
-package tst.investing.hooks.Infrastructure;
+package tst.investing.Infrastructure;
 
-import tst.investing.hooks.SelenideConfiguration;
+import tst.investing.SelenideConfiguration;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static tst.investing.hooks.Infrastructure.Log.*;
+
 public class Utilities {
 
-    public static String logAndGetString(LogLevel logLevel, String logMessage) {
+    public static String logAndGetString(tst.investing.hooks.Infrastructure.LogLevel logLevel, String logMessage) {
         switch (logLevel) {
-            case ERROR -> Log.error(logMessage);
-            case WARN -> Log.warn(logMessage);
-            case DEBUG -> Log.debug(logMessage);
-            default -> Log.info(logMessage);
+            case ERROR -> error(logMessage);
+            case WARN -> warn(logMessage);
+            case DEBUG -> debug(logMessage);
+            default -> info(logMessage);
         }
         return logMessage;
     }

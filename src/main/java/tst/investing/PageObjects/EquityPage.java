@@ -1,4 +1,4 @@
-package tst.investing.hooks.PageObjects;
+package tst.investing.PageObjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,10 +6,10 @@ import tst.investing.hooks.Infrastructure.LogLevel;
 
 import java.util.Map;
 
-import static tst.investing.hooks.Infrastructure.Utilities.logAndGetString;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static tst.investing.Infrastructure.Utilities.logAndGetString;
 
 
 public class EquityPage {

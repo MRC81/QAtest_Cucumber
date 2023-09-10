@@ -5,7 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static java.lang.Boolean.parseBoolean;
-import static tst.investing.hooks.Infrastructure.Utilities.setSelenideProperties;
+import static tst.investing.Infrastructure.Utilities.setSelenideProperties;
 
 
 public class SelenideConfiguration {

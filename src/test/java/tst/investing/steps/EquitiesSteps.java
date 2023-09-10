@@ -1,7 +1,7 @@
 package tst.investing.steps;
 
 import tst.investing.hooks.Infrastructure.TestContext;
-import tst.investing.hooks.PageObjects.EquityPage;
+import tst.investing.PageObjects.EquityPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class EquitiesSteps {
-    private TestContext testContext;
+    private final TestContext testContext;
 
     public EquitiesSteps(TestContext testContext) {
         this.testContext = testContext;
