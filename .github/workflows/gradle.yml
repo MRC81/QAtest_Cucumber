@@ -32,30 +32,6 @@ jobs:
           ./gradlew clean test
         continue-on-error: true
 
-#      - name: Generate Allure Reports
-#        run: |
-#          ./gradlew allureReport
-#
-#      - name: Upload Allure Results
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: allure-results
-#          path: build/allure-results
-#
-#  publish:
-#    needs: build
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Download Allure Results
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: allure-results
-#
-#      - name: Publish Allure Report
-#        run: |
-#          allure generate allure-results --clean
-#          allure open
       - name: Get Allure history
         uses: actions/checkout@v3
         if: always()
