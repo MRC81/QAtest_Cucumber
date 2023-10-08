@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Sun Oct 08 15:18:53 GMT 2023","Sun Oct 08 15:20:34 GMT 2023","100332","","Verify that the current stock value is within the 52 week range","","Compare the current value with the 52 week range on the ""/equities/tesla-motors"" page","","Compare the current value with the 52 week range on the ""/equities/tesla-motors"" page","  I want to verify that the current stock value on the page
+  is within the values of the the 52 Week Range from the page"
+"broken","Sun Oct 08 15:15:18 GMT 2023","Sun Oct 08 15:17:13 GMT 2023","114667","","Verify that the current stock value is within the 52 week range","","Compare the current value with the 52 week range on the ""/equities/gamestop-corp"" page","","Compare the current value with the 52 week range on the ""/equities/gamestop-corp"" page","  I want to verify that the current stock value on the page
+  is within the values of the the 52 Week Range from the page"
+"broken","Sun Oct 08 15:17:13 GMT 2023","Sun Oct 08 15:18:53 GMT 2023","100552","","Verify that the current stock value is within the 52 week range","","Compare the current value with the 52 week range on the ""/equities/apple-computer-inc"" page","","Compare the current value with the 52 week range on the ""/equities/apple-computer-inc"" page","  I want to verify that the current stock value on the page
+  is within the values of the the 52 Week Range from the page"
