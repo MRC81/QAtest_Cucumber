@@ -22,7 +22,7 @@ public class SelenideConfiguration {
 
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
+
 
         Configuration.browserCapabilities = options;
 

@@ -31,7 +31,7 @@ jobs:
       - name: Build and Test with Gradle
         if: always()
         run: |
-          ./gradlew clean test
+          ./gradlew clean test -Dselenide.headless=true
         continue-on-error: true
 
       - name: Get Allure history

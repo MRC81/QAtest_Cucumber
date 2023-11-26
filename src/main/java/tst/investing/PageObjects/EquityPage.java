@@ -8,7 +8,6 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static tst.investing.Infrastructure.Utilities.logAndGetString;
 
 
@@ -17,20 +16,10 @@ public class EquityPage {
     private final SelenideElement weekRange = $("[data-test='weekRange']");
 
 
-    public void navigateTo(String uri) {
-        try {
-            open(uri);
-        } catch (Exception e) {
-            throw new IllegalStateException(logAndGetString(LogLevel.ERROR, "Unable to open '" + uri + "' page, " +
-                    "see the traces: \n" + e));
-        }
-
-    }
-
     public double getEquityOpenValue() {
         try {
             return  Double.parseDouble(currentValue.shouldBe(Condition.visible).getText());
-        } catch (Exception e) {
+        } catch (Error e) {
             throw new IllegalStateException(logAndGetString(LogLevel.ERROR, "Unable to get Equity open value, " +
                     "see the traces: \n" + e));
         }

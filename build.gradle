@@ -11,15 +11,15 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_14
-    targetCompatibility = JavaVersion.VERSION_14
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 ext {
-    selenideVersion = '6.16.0'
-    junitVersion = "5.9.3"
-    junitPlatformVersion = "1.9.3"
-    cucumberVersion = "7.12.1"
+    selenideVersion = '7.0.2'
+    junitVersion = "5.10.1"
+    junitPlatformVersion = "1.10.1"
+    cucumberVersion = "7.14.0"
     allureVersion= "2.24.0"
     slf4jVersion = "2.0.7"
 }
