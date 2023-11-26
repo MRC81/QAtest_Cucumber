@@ -38,4 +38,3 @@ Feature: Verify Top Navigation bar
       | Tiếng Việt             |
       | Português (Brasil)     |
       | हिंदी                  |
-    |                        figa|
