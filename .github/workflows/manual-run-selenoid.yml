@@ -1,4 +1,4 @@
-name: Cucumber Allure tests CI - manual run with Selenoid
+name: Cucumber Allure tests CI - manual (Selenoid)
 
 on:
   workflow_call:
