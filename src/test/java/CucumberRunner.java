@@ -5,16 +5,10 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         glue = {"cucumber.glue.hooks", "cucumber.glue.steps"},
-        plugin = {
-//                "progress",
-//                "summary",
-//                "pretty",
-                "html:reports/cucumber-report.html",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
-        },
+        plugin = {"pretty", "html:reports/cucumber-report.html"},
         features = {"src/test/resources/features"},
-        monochrome =false,
-        publish = false
+        monochrome =true,
+        publish = true
 )
 
 public class CucumberRunner {
